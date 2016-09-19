@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <script> //same as example used on constructor pattern
+    function Car(make, model, color) {
+        this.make     = make;
+        this.model    = model;
+        this.color    = color;
+    }
+
+    Car.prototype.getInfo = function() {
+        return this.make + ', ' + this.model + ', ' + this.color;
+    };
+    Car.prototype.accelerate = function() {
+        return 'this car runs fast';
+    };
+
+
+    var aCar = new Car('Toyota', 'Corolla', 'black');
+    console.log(aCar.getInfo());  //displays Toyota, corolla, black
+    console.log(aCar.accelerate()); // this car runs fast.
+
+    </script>
+
+  </body>
+</html>

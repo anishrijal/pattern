@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Revealing MOdular design pattern</title>
+  </head>
+  <body>
+    <script>
+      var myCalculatorAdds = (function(){
+        var privateX = 0;
+        var privateY = 0;
+        function privateAdd(){
+          var sum = privateX + privateY;
+          console.log('the sum: '+ sum)
+        }
+        function publicSetValue(x,y){
+          privateX = x;
+          privateY = y;
+        }
+        function publicGetResult(){
+          privateAdd();
+        }
+
+        return{
+          setValue: publicSetValue,
+          getResult: publicGetResult
+        };
+      })();
+
+      myCalculatorAdds.setValue(5,7);
+      myCalculatorAdds.getResult();
+
+    </script>
+  </body>
+</html>

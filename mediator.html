@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <ul id='messages'></ul>
+    <script>
+    var messages=document.getElementById('messages');
+
+function Participant(name){
+	this.name=name;
+	this.chatroom=null;
+}
+
+Participant.prototype.send=function(message,to){
+	this.chatroom.send(message,this,to);
+}
+
+Participant.prototype.receive=function(message,from){
+	var li = document.createElement('li');
+	li.className=from.name;
+	li.innerText=from.name+" says: "+message;
+	messages.appendChild(li);
+	console.log(from.name,"says:",message);
+}
+
+function Chatroom(name){
+	this.participants={};
+	this.room=name
+}
+
+Chatroom.prototype.register=function(participant){
+	this.participants[participant.name]=participant;
+	participant.chatroom=this;
+}
+
+Chatroom.prototype.getList=function(){
+	console.log(Object.keys(this.participants));
+}
+
+Chatroom.prototype.send=function(message,from,to){
+	console.log(to.name)
+	this.participants[to.name].receive(message,from)
+}
+
+var ksquare = new Chatroom('ksquare');
+
+var donovan = new Participant('donovan');
+var jaime = new Participant('jaime');
+
+ksquare.register(donovan);
+ksquare.register(jaime);
+
+donovan.send("Kill me",jaime)
+
+jaime.send("Absolutely",donovan)
+
+donovan.send("Thank You",jaime)
+donovan.send("Kill me",jaime)
+
+jaime.send("Absolutely",donovan)
+
+donovan.send("Thank You",jaime)
+
+    </script>
+
+  </body>
+</html>

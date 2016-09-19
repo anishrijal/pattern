@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+      div{
+        height: 40px;
+        width: 300px;
+        border: 1px solid black;
+        margin: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    Subject:<input type="text" id="subject"><br>
+
+  Observer:
+  <div id="observer1"></div>
+  <div id="observer2"></div>
+  <div id="observer3"></div>
+    <script>
+    // observerlist collection object
+      function Observerlist(){
+        this.Observerlist=[];
+      }
+      Observerlist.prototype.add=function(obj){
+        return this.Observerlist.push(obj);
+      };
+      Observerlist.prototype.count=function(){
+        return this.Observerlist.length;
+      };
+      Observerlist.prototype.remove=function(index){
+        this.Observerlist.splice(index,1);
+      };
+      Observerlist.prototype.get=function(index){
+        if(index > -1 && index < this.Oberserverlist.length){
+          return this.Observerlist[index];
+        }
+      };
+      Observerlist.prototype.indexof=function(obj){
+        for(var i=0; i< this.Observerlist.length; i++){
+          if(this.Observerlist[i]===obj){
+            return i;
+          }
+        }
+      }
+      Observerlist.prototype.getObj= function(index){
+        return this.Observerlist[index];
+      }
+
+      function ISubject(){
+        this.Observers = new Observerlist();
+      }
+
+      ISubject.prototype.addObserver = function(observer){
+        this.Observers.add(observer);
+      };
+
+      ISubject.prototype.removeObserver=function(observer){
+        this.Observers.remove(this.Observers.indexof(observer));
+      };
+
+      ISubject.prototype.notify= function(ctx){
+        for(var i=0; i< this.Observers.count(); i++){
+          this.Observers.getObj(i).update(ctx);
+        }
+      };
+      function IObserver(){}
+        IObserver.prototype.update=function(val){
+
+        }
+        var extend = function(obj, extension){
+          for(var k in extension){
+            obj[k]= extension[k];
+          }
+        };
+
+        extend(subject, new ISubject());
+        extend(observer1, new IObserver());
+        extend(observer2, new IObserver());
+        extend(observer3, new IObserver());
+        subject.addEventListener('keyup', function(){
+          this.notify(this.value);
+        },false);
+        subject.addObserver(observer1);
+        subject.addObserver(observer2);
+        subject.addObserver(observer3);
+        observer1.update=function(val){
+          this.innerHTML=val;
+        }
+        observer2.update=function(val){
+          window.setTimeout(function () {
+            observer2.innerHTML=val;
+          }, 500);
+        }
+        observer3.update=function(val){
+          this.innerHTML=val;
+        };
+        window.setTimeout(function(){
+          subject.removeObserver(observer3);
+        },3000);
+
+
+
+    </script>
+  </body>
+</html>

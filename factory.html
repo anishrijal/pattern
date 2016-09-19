@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <script>
+    var peopleFactory = function(name, age, state){
+      var temporary={};
+      temporary.age = age;
+      temporary.name=name;
+      temporary.state=state;
+      temporary.printPerson = function(){
+          console.log(this.name, this.age, this.state);
+      };
+      return temporary;
+    };
+
+    var person1 =  peopleFactory('harry', 24, 'LA');
+    var person2 =  peopleFactory('Linda', 27, 'TX');
+    var person3 =  peopleFactory('Cloe', 18, 'WI');
+
+    person1.printPerson();
+    person2.printPerson();
+    person3.printPerson();
+
+
+    var mammal={
+      giveBirth: function(name){
+        return name + "can give birth";
+      }
+    };
+
+    var bird={
+      canFly: function(name){
+        return name + "can fly";
+      }
+    };
+
+    var fish={
+      canSwim: function(name){
+        return name + "can Swim";
+      }
+    };
+
+
+    var sparrow = Object.create(bird);
+    var fly = sparrow.canFly('sparrow');
+    console.log(fly);
+
+
+    function beer(options){
+      this.contain =options.contain|| "5 %";
+      this.kind = options.kind|| "dark";
+    }
+    function wine(options){
+      this.sizeof = options.sizeof || "12 oz";
+      this.winetype= options.winetype || "white";
+    }
+
+    function Alcohol(){}
+
+     Alcohol.prototype.createAlcohol= function(options){
+       switch(options.alcoholType){
+         case "beer":
+            this.alcoholType = beer;
+            break;
+         case 'wine':
+            this.alcoholType = wine;
+            break;
+       }
+       return new this.alcoholType(options);
+     };
+
+    var modelo = new Alcohol();
+    var modeloNegro = modelo.createAlcohol({
+                      alcoholType: "beer",
+                      color: 'dark'
+    })
+
+    var cabernet = new Alcohol();
+    var robertMartini = cabernet.createAlcohol({
+                      alcoholType: "wine",
+                      winetype: 'red'
+    })
+
+    console.log(modeloNegro);
+    console.log(robertMartini);
+
+    </script>
+  </body>
+</html>

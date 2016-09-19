@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+    <script>
+    // var newObject= {};
+    // newObject.firstname ="anish";
+    // var value = newObject.firstname;
+    // // console.log(value);
+    // // constructor is a method used to initialize
+    // // a new object. we need a keyword 'new'. inside
+    // // the function this keyword is used to reference
+    // // the new object that's being created.
+    // var newObject2 = new Object()
+    //
+    // newObject["lastname"] ="rijal";
+    // var value2= newObject["lastname"];
+    //
+    // var defineProp = function(Obj, key, value){
+    //
+    //   Object.defineProperty(Obj, key,{
+    //     value:value});
+    //
+    //   }
+    //
+    //   var person =Object.create(Object.prototype);
+    //   defineProp(person, "firstname", "anish");
+    //   defineProp(person, "lastname", "rijal");
+    //   defineProp(person, "country", "usa");
+    //   // console.log(person);
+    //
+    //   var defineProps = function(newObj, Obj ){
+    //
+    //     Object.defineProperties(newObj,Obj);
+    //     }
+    //
+    //   var personal=Object.create(Object.prototype);
+    //   defineProps(personal, {firstname :{value:"anish"},
+    //                         lastname:{value:"rijal"},
+    //                       country:{value:"usa"}});
+    //
+    //
+    //   function Car(model, year, miles){
+    //     this.model=model;
+    //     this.year=year;
+    //     this.miles=miles;
+    //     this.carinfo= function(){
+    //       return this.model+ " has "+this.miles+" miles."
+    //     };
+    //   }
+    //
+    //     var civic = new Car("honda civc", 2000, 15400);
+    //     // console.log(civic.carinfo());
+    //
+    //     function Carrito(model, year, miles){
+    //       this.model=model;
+    //       this.year=year;
+    //       this.miles=miles;
+    //     };
+    //
+    //     Carrito.prototype.carritoinfo= function(){
+    //         return this.model+ " is "+this.year+" old.";
+    //
+    //     };
+    //
+    //       var civic = new Carrito("honda civc", 2000, 15400);
+    //       console.log(civic.carritoinfo);
+
+      //building a constuctor which is an object in javascript 
+        function Employee(id, name, salary, department){
+          this.id=id;
+          this.name=name;
+          this.salary=salary;
+          this.department=department;
+          // this.employeeinfo= function(){
+          //   return this.id + ": "+this.name+ " works in "+this.department+" and makes "+this.salary;
+          // }
+          //every time a new employee is called a new function is been call so more sapce and time intead we make a prototype of this object.
+        }
+
+        Employee.prototype.employeeinfo = function(){
+          return this.id + ": "+this.name+ " works in "+this.department+" and makes "+this.salary;
+
+        }
+
+        var employee1= new Employee(7,'Harris', '$1050', 'HR')// here the keyword NEW inisiate a new object with the mebers defined by the function Employee
+        var employee2= new Employee(8,'Jeffron', '$1200', 'HR')
+        var employee3= new Employee(3,'Randal', '$2000', 'IT')
+
+        // console.log(employee1.employeeinfo); this way it is just calling the member of the function, if i wanna call the function i have to call it as a fucntion
+
+        console.log(employee1.employeeinfo());
+        console.log(employee2.employeeinfo());
+        console.log(employee3.employeeinfo());
+
+    </script>
+  </body>
+</html>

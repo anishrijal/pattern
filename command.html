@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <script>
+    function Ebay(){
+      this.items = [];
+    }
+
+    Ebay.prototype ={
+
+      shoppingCart: function(name){
+        // var args = Array.prototype.slice.call(arguments);
+        var fnName = name;
+        if(this[fnName]){
+          this[fnName](arguments);
+        }
+      },
+        addToCart: function(arguments){
+        for(var i=1; i<arguments.length; i++){
+        this.items.push(arguments[i]);
+        console.log(this.items);
+        }
+      },
+      removeFromCart: function(item){
+        this.items.splice(this.items,1);
+        console.log(this.items);
+
+      }
+
+    };
+
+    var ebay1= new Ebay;
+    ebay1.shoppingCart("addToCart", 'iphone', 'iwatch', 'ipad');
+    // ebay1.shoppingCart("addToCart", 'iwatch');
+    // ebay1.shoppingCart("addToCart", 'ipad');
+    ebay1.shoppingCart("removeFromCart", 'iwatch')
+    </script>
+  </body>
+</html>

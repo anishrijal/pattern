@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <script>
+
+    // var mySingleton=(function(){
+    //   var instance;
+    //   function init(){
+    //     var anotherPrivateRandomNumber= Math.random();
+    //     // function privateMethod(){
+    //     //   console.log("I am a private");
+    //     // }
+    //     var privateVariable="I am also a private";
+    //     var privateRandomNumber= Math.random();
+    //     return{
+    //       puhblicMethod: function(){
+    //         console.log("the public can see me");
+    //       },
+    //       publicProperty: "I am also public",
+    //       getRandomNumber: function(){
+    //         console.log(privateRandomNumber);
+    //         return privateRandomNumber;
+    //       },
+    //
+    //       getAnotherRandomNumber: function(){
+    //         console.log(anotherPrivateRandomNumber);
+    //         return anotherPrivateRandomNumber;
+    //       }
+    //     };
+    //
+    //   };
+    //   return {
+    //     getInstance: function(){
+    //       // if(!instance){
+    //         instance=init();
+    //       // }
+    //       return instance;
+    //     }
+    //   };
+    // })();
+    //
+    // var singleA=mySingleton.getInstance();
+    // var singleB=mySingleton.getInstance();
+    // console.log(singleA.getRandomNumber()===singleB.getRandomNumber());
+    // console.log(singleA.getAnotherRandomNumber()===singleB.getAnotherRandomNumber());
+
+    //ensure there is only one instance of an object
+    //and provide a global point to access to it.
+    // it looks more like module.
+
+      var myPerson =(function(){ //self calling function
+            var instance; // private property holding the only instance
+            var createNewPerson =function (){
+                var weight = 100;//private property of createfunction
+                var newWeight= function(lb){
+                  weight =lb;
+                };
+                var increaseWeight = function(passWeight){//private method to add more weight
+                  passWeight=passWeight+weight;
+                  newWeight(passWeight);
+                };
+                var getWeight = function(){
+                  return weight;
+                };
+                return{//using revealing module pattern whcih is closure to access private property
+                      //module pattern can also be used.
+                  setNewWeight: increaseWeight,
+                  getNewWeight: getWeight
+                };
+
+              };
+              return {//to create instance of person
+                getInstance: function(){
+                  if(!instance){
+                    instance = createNewPerson();
+                  }
+                  // if there is already an instance
+                  return createNewPerson();
+                }
+              };
+
+    })();
+
+    var person1 = myPerson.getInstance();// creates the first person
+    console.log(person1.getNewWeight()); // the default value i.e 100
+
+    var person2 = myPerson.getInstance();// creates the 2nd person same instance is used
+    console.log(person2.getNewWeight());// the default value i.e 100
+
+    person1.setNewWeight(60); // increaseWeight method is called to add more weigth.
+    console.log(person1.getNewWeight());// return new weight i.e 160
+    console.log(person2.getNewWeight());// return new weight i.e 160 sinc it uses the same instance
+
+
+    </script>
+  </body>
+</html>

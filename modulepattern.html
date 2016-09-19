@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>
+
+
+    </title>
+  </head>
+  <body>
+    <script>
+    // module pattern uses obj to self contain code inside th epbj which take adv of closure,
+    // which allows var and function to exists inside a scoped module.
+
+    var myModuleExample=(function(){
+      var sum=0;
+      var mult=1
+      return{
+        add: function(){
+          sum = sum + 1;
+          return sum;
+        },
+        mult: function(){
+          mult = mult * ( mult + 1 )
+          return mult;
+        },
+        resetAdd: function(){
+
+          sum = 0
+          return sum;
+
+        },
+        resetMult: function(){
+          mult = 1
+          return mult;
+        }
+
+      }
+    })();
+
+    console.log(myModuleExample.add());
+    console.log(myModuleExample.add());
+    console.log(myModuleExample.add());
+    console.log(myModuleExample.mult());
+    console.log(myModuleExample.mult());
+    console.log(myModuleExample.resetAdd());
+    console.log(myModuleExample.resetMult());
+
+
+    // var person={
+    //   property: 'i am a male',
+    //   myfeature: {
+    //     hashair: 'true',
+    //     language: 'spanish'
+    //   },
+    //   doSomething: function(){
+    //     console.log("playing soccer everyday");
+    //   },
+    //   updateSomething: function(newUpdate){
+    //     if(typeof newUpdate==='object'){
+    //       this.myfeature = newUpdate;
+    //       console.log("i can speak "+this.myfeature.language);
+    //     }
+    //   }
+    // };
+    // person.updateSomething({
+    //   language: 'english'
+    // });
+
+    // var testModule =(function(){
+    //   var count=0;
+    //   return{
+    //     increment: function(){
+    //       return count++;
+    //
+    //     },
+    //      reset:function() {
+    //        console.log('count prior to reset'+count);
+    //        count=0;
+    //      }
+    //   }
+    // })();
+    // testModule.increment();
+    // testModule.increment();
+    // testModule.increment();
+    // testModule.increment();
+    // testModule.increment();
+    // testModule.increment();
+    // testModule.increment();
+    // testModule.reset();
+    //
+    // var myNamespace =(function(){
+    //   var myPrivateVar, myPrivateMethod;
+    //   myPrivateVar =0;
+    //   myPrivateMethod = function(foo){
+    //     console.log(foo);
+    //   };
+    //   return{
+    //     myPublicVar: "foo",
+    //     myPublicFucntion: function(bar){
+    //       myPrivateVar++;
+    //       myPrivateMethod(bar);
+    //     }
+    //   };
+    // })();
+        // myNamespace.myPublicFucntion();
+    //
+
+
+    // var basketModule= (function(){
+    //   var basket=[];
+    //   function doSomethingPrivate(){}
+    //   function doSomethingElsePrivate(){}
+    //   return{
+        // addItem: function(values){
+        //   basket.push(values);
+        // },
+        // getItemcount: function(){
+        //   return basket.length;
+        // },
+        // // doSomething: doSomethingPrivate,
+        // getTotal: function(){
+        //   var q=this.getItemcount(),
+        //   p=0;
+        //   while(q--){
+        //     p= p+ basket[q].price;
+          // }
+    //       return p;
+    //     }
+    //   }
+    //
+    // })();
+    //
+    // basketModule.addItem({
+    //   item: "bread",
+    //   price: 1
+    // });
+    // basketModule.addItem({
+    //   item: "butter",
+    //   price: 2
+    // });
+    //
+    // console.log(basketModule.getItemcount());
+    // console.log(basketModule.getTotal());
+    // console.log(basketModule.basket);
+    // console.log(basket);
+
+    // var myRevealingModule=(function(){
+    //   var privateVar =" nice cat",
+    //       publicVar="hey there";
+    //   function privateFunction(){
+    //     console.log(publicVar + privateVar);
+    //   }
+    //   function publicSetName(strName){
+    //     privateVar= strName;
+    //   }
+    //   function publicGetName(){
+    //     privateFunction();
+    //   }
+    //   return{
+    //     setName: publicSetName,
+    //     greeting: publicVar,
+    //     getName: publicGetName
+    //   };
+    // })();
+    //
+    // myRevealingModule.setName(" dirty dog");
+    // myRevealingModule.getName();
+
+    // var myRevealingModule=(function(){
+    //   var privateCounter=0;
+    //    function privateFunction(){
+    //      privateCounter++;
+    //    }
+    //    function publicfuction(){
+    //      publicIncrement();
+    //    }
+    //    function publicIncrement(){
+    //      privateFunction();
+    //    }
+    //    function publicGetCount(){
+    //      return privateCounter;
+    //    }
+    //    return{
+    //      start: publicfuction,
+    //      increment: publicIncrement,
+    //      count: publicGetCount
+    //    };
+    // })();
+    // // console.log(myRevealingModule.count());
+    // myRevealingModule.start();
+    // myRevealingModule.start();
+    // myRevealingModule.start();
+    // myRevealingModule.start();
+    // myRevealingModule.start();
+    // myRevealingModule.start();
+    // console.log(myRevealingModule.count());
+
+    </script>
+
+  </body>
+</html>
