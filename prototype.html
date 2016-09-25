@@ -19,8 +19,10 @@
         return 'this car runs fast';
     };
 
-
-    var aCar = new Car('Toyota', 'Corolla', 'black');
+    var aCar =  Object.create(Car.prototype);
+    aCar.make = 'toyota';
+    aCar.make = 'corolla';
+    aCar.make = 'black';
     console.log(aCar.getInfo());  //displays Toyota, corolla, black
     console.log(aCar.accelerate()); // this car runs fast.
 

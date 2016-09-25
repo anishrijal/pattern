@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <script>
+    var facade =(function (){
+
+    	function animal(kind){
+    		return kind + ' is an animal.';
+    	}
+    	function bird(kind){
+    		return kind + ' is a bird.';
+    	}
+
+
+    	return{
+    		find:function(kind,life){
+    			switch(life){
+    				case 'animal':
+    					return animal(kind);
+    				case 'bird':
+    					return bird(kind);
+
+    			}
+
+    		}
+    	}
+    })();
+
+    console.log(facade.find('dog','animal'));
+    console.log(facade.find('sparrow','bird'));
+
+    </script>
+  </body>
+</html>

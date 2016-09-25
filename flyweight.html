@@ -7,116 +7,46 @@
   </head>
   <body>
     <script>
-    var CoffeeOrder = {
+    var Employee = function( eId, eTitle, salary, dateHired, department, holidayLeft, shift ){
 
-      // Interfaces
-      serveCoffee:function(context){},
-        getFlavor:function(){}
+       this.eId = eId;
+       this.eTitle = eTitle;
+       this.salary = salary;
+       this.dateHired = dateHired;
+       this.department = department;
+       this.holidayleft = holidayLeft;
+       this.shift= shift;
 
-      };
-
-    function CoffeeFlavor( newFlavor ){
-
-      var flavor = newFlavor;
-
-      // If an interface has been defined for a feature
-      // implement the feature
-      if( typeof this.getFlavor === "function" ){
-        this.getFlavor = function() {
-            return flavor;
-        };
-      }
-
-      if( typeof this.serveCoffee === "function" ){
-        this.serveCoffee = function( context ) {
-          console.log("Serving Coffee flavor "
-            + flavor
-            + " to table number "
-            + context.getTable());
-      };
-      }
-
-    }
-
-    CoffeeFlavor.implementsFor( CoffeeOrder );
-
-
-// Handle table numbers for a coffee order
-function CoffeeOrderContext( tableNumber ) {
-   return{
-      getTable: function() {
-         return tableNumber;
-     }
-   };
-}
-
-
-function CoffeeFlavorFactory() {
-    var flavors = {},
-    length = 0;
-
-    return {
-        getCoffeeFlavor: function (flavorName) {
-
-            var flavor = flavors[flavorName];
-            if (typeof flavor === "undefined") {
-                flavor = new CoffeeFlavor(flavorName);
-                flavors[flavorName] = flavor;
-                length++;
-            }
-            return flavor;
-        },
-
-        getTotalCoffeeFlavorsMade: function () {
-            return length;
-        }
     };
-}
 
-function testFlyweight(){
+    Employee.prototype = {
+
+      getTitle: function () {
+         return this.eTitle;
+      },
+     
+      getHired: function () {
+         return this.dateHired;
+      },
+
+      updateEmployeeStatus: function( eId, eTitle, department ){
+
+         this.eid = eId;
+         this.eTitle = eTitle;
+         this.department = department;
+
+      },
+
+      holidayStatus: function( eId, holidayLeft ){
+
+          this.eId = eId;
+          this.holidayLeft = holidayLeft;
+
+      },
+
+    };
 
 
-  // The flavors ordered.
-  var flavors = new CoffeeFlavor(),
-
-  // The tables for the orders.
-    tables = new CoffeeOrderContext(),
-
-  // Number of orders made
-    ordersMade = 0,
-
-  // The CoffeeFlavorFactory instance
-    flavorFactory;
-
-  function takeOrders( flavorIn, table) {
-     flavors[ordersMade] = flavorFactory.getCoffeeFlavor( flavorIn );
-     tables[ordersMade++] = new CoffeeOrderContext( table );
-  }
-
-   flavorFactory = new CoffeeFlavorFactory();
-
-   takeOrders("Cappuccino", 2);
-   takeOrders("Cappuccino", 2);
-   takeOrders("Frappe", 1);
-   takeOrders("Frappe", 1);
-   takeOrders("Xpresso", 1);
-   takeOrders("Frappe", 897);
-   takeOrders("Cappuccino", 97);
-   takeOrders("Cappuccino", 97);
-   takeOrders("Frappe", 3);
-   takeOrders("Xpresso", 3);
-   takeOrders("Cappuccino", 3);
-   takeOrders("Xpresso", 96);
-   takeOrders("Frappe", 552);
-   takeOrders("Cappuccino", 121);
-   takeOrders("Xpresso", 121);
-
-   for (var i = 0; i < ordersMade; ++i) {
-       flavors[i].serveCoffee(tables[i]);
-   }
-   console.log(" ");
-   console.log("total CoffeeFlavor objects made: " + flavorFactory.getTotalCoffeeFlavorsMade());
-}
     </script>
   </body>
 </html>

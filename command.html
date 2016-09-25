@@ -6,38 +6,47 @@
   </head>
   <body>
     <script>
-    function Ebay(){
-      this.items = [];
-    }
+    function Shop(){
+	this.items=[];
+}
 
-    Ebay.prototype ={
+Shop.prototype = {
 
-      shoppingCart: function(name){
-        // var args = Array.prototype.slice.call(arguments);
-        var fnName = name;
-        if(this[fnName]){
-          this[fnName](arguments);
-        }
-      },
-        addToCart: function(arguments){
-        for(var i=1; i<arguments.length; i++){
-        this.items.push(arguments[i]);
-        console.log(this.items);
-        }
-      },
-      removeFromCart: function(item){
-        this.items.splice(this.items,1);
-        console.log(this.items);
+	doShopping: function(name){
 
-      }
+		if(name=='addToCart'|| name=='removeFromCart'){
 
-    };
+		return	this[name](Array.prototype.slice.call(arguments,1));
 
-    var ebay1= new Ebay;
-    ebay1.shoppingCart("addToCart", 'iphone', 'iwatch', 'ipad');
-    // ebay1.shoppingCart("addToCart", 'iwatch');
-    // ebay1.shoppingCart("addToCart", 'ipad');
-    ebay1.shoppingCart("removeFromCart", 'iwatch')
+		}
+	},
+	addToCart: function(args){
+		for(var i=0; i< args.length; i++)
+		{
+			this.items.push(args[i]);
+
+		}
+		return this.items;
+
+	},
+	removeFromCart: function(item){
+
+
+
+		var remo;
+		for(var i=0; i<item.length; i++){
+			remo= this.items.indexOf(item[i]);
+			this.items.splice(remo,1);
+		}
+		 return this.items;
+
+	}
+}
+
+var shop1 = new Shop();
+console.log(shop1.doShopping('addToCart','iphone', 'ipad','iwatch','ihop'));
+console.log(shop1.doShopping('removeFromCart', 'iphone', 'ihop'));
+
     </script>
   </body>
 </html>

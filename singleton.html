@@ -6,52 +6,6 @@
   </head>
   <body>
     <script>
-
-    // var mySingleton=(function(){
-    //   var instance;
-    //   function init(){
-    //     var anotherPrivateRandomNumber= Math.random();
-    //     // function privateMethod(){
-    //     //   console.log("I am a private");
-    //     // }
-    //     var privateVariable="I am also a private";
-    //     var privateRandomNumber= Math.random();
-    //     return{
-    //       puhblicMethod: function(){
-    //         console.log("the public can see me");
-    //       },
-    //       publicProperty: "I am also public",
-    //       getRandomNumber: function(){
-    //         console.log(privateRandomNumber);
-    //         return privateRandomNumber;
-    //       },
-    //
-    //       getAnotherRandomNumber: function(){
-    //         console.log(anotherPrivateRandomNumber);
-    //         return anotherPrivateRandomNumber;
-    //       }
-    //     };
-    //
-    //   };
-    //   return {
-    //     getInstance: function(){
-    //       // if(!instance){
-    //         instance=init();
-    //       // }
-    //       return instance;
-    //     }
-    //   };
-    // })();
-    //
-    // var singleA=mySingleton.getInstance();
-    // var singleB=mySingleton.getInstance();
-    // console.log(singleA.getRandomNumber()===singleB.getRandomNumber());
-    // console.log(singleA.getAnotherRandomNumber()===singleB.getAnotherRandomNumber());
-
-    //ensure there is only one instance of an object
-    //and provide a global point to access to it.
-    // it looks more like module.
-
       var myPerson =(function(){ //self calling function
             var instance; // private property holding the only instance
             var createNewPerson =function (){
@@ -87,13 +41,8 @@
 
     var person1 = myPerson.getInstance();// creates the first person
     console.log(person1.getNewWeight()); // the default value i.e 100
-
-    var person2 = myPerson.getInstance();// creates the 2nd person same instance is used
-    console.log(person2.getNewWeight());// the default value i.e 100
-
     person1.setNewWeight(60); // increaseWeight method is called to add more weigth.
     console.log(person1.getNewWeight());// return new weight i.e 160
-    console.log(person2.getNewWeight());// return new weight i.e 160 sinc it uses the same instance
 
 
     </script>

@@ -6,68 +6,56 @@
   </head>
   <body>
     <script>
-    // function Mammal( kind ){
-    //     this.Kind = kind|| "human";
-    //     this.hashair = "false";
-    //     this.haseyes = 2;
-    //   }
-    //
-    //   var mammalInstance = new Mammal( "pig" );
-    //   console.log( mammalInstance );
-    //
-    //   var dog = new Mammal( "dog" );
-    //
-    //   dog.hashair= function( para ){
-    //     this.hashair = para;
-    //   };
-    //
-    //   dog.bark = function( bark ){
-    //     this.bark = bark;
-    //   };
-    //
-    //   dog.hashair( "true" );
-    //   dog.bark( "can bark" );
-    //
-    //   console.log(dog);
-    //   var cat = new Mammal( "cat" );
-    //   cat.hashair= function( pa ){
-    //     this.hashair = pa;
-    //   };
-    //   cat.hashair( "sometimes" );
-    //
-    //   console.log( cat );
 
-    function Car(){
-      this.cost = function(){return 30000;}
-      this.color = function(){return 'black'};
-    }
 
-    function insurance(name){
-      var ins = name.cost();
-      name.cost = function()
-      {
-        ins = ins + 300;
-        return ins;
+      function Person(name){
+        this.name = name;
+
+      }
+
+      function PersonalDetail(sameName, occupation, age){
+        this.sameName = sameName;
+        this.name = sameName.name;
+        this.occupation= occupation
+        this.age = age;
+
+        this.getInfo = function () {
+          help.setter("Personal Detail: " + this.name + " is a " + this.occupation + " and is " + this.age + ' years old');
+
+        }
+      }
+
+      function Help(){
+        var info='';
+
+
+        return{
+          setter: function(string){
+            info =  string;
+          },
+          getter: function(){
+            return info;
+          }
+
+        };
       };
-    }
-    function monthly(name){
-      var mon = name.cost();
-      name.cost = function(){
-        return mon + 300;
-      };
-    }
-    function color(name){
-      var red = name.color();
-      name.color = function(){return 'red';};
-    }
-    var car1 = new Car();
-    insurance(car1);
-    monthly(car1);
-    color(car1);
 
-    console.log(car1.cost());
-    console.log(car1.color());
+      var help = new Help();
 
+
+        var person = new Person("David");
+        // person.getInfo();
+
+        var personalDetail = new PersonalDetail(person, 'student', 18);
+        personalDetail.getInfo();
+
+        console.log(help.getter());
+
+
+
+        // to enhance an object with more properties
+        // but in this one the new properties are not going to be placed directly on the object
+        // those are going to be placed on a new object that will have as reference the old object
 
     </script>
  </body>
