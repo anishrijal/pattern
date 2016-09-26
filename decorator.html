@@ -6,57 +6,21 @@
   </head>
   <body>
     <script>
-
-
       function Person(name){
         this.name = name;
-
       }
-
       function PersonalDetail(sameName, occupation, age){
         this.sameName = sameName;
         this.name = sameName.name;
         this.occupation= occupation
         this.age = age;
-
         this.getInfo = function () {
-          help.setter("Personal Detail: " + this.name + " is a " + this.occupation + " and is " + this.age + ' years old');
-
+          return "Personal Detail: " + this.name + " is a " + this.occupation + " and is " + this.age + ' years old';
         }
       }
-
-      function Help(){
-        var info='';
-
-
-        return{
-          setter: function(string){
-            info =  string;
-          },
-          getter: function(){
-            return info;
-          }
-
-        };
-      };
-
-      var help = new Help();
-
-
-        var person = new Person("David");
-        // person.getInfo();
-
-        var personalDetail = new PersonalDetail(person, 'student', 18);
-        personalDetail.getInfo();
-
-        console.log(help.getter());
-
-
-
-        // to enhance an object with more properties
-        // but in this one the new properties are not going to be placed directly on the object
-        // those are going to be placed on a new object that will have as reference the old object
-
+      var person = new Person("David");
+      var personalDetail = new PersonalDetail(person, 'student', 18);
+      console.log(personalDetail.getInfo());
     </script>
  </body>
 </html>

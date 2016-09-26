@@ -7,45 +7,72 @@
   </head>
   <body>
     <script>
-    var Employee = function( eId, eTitle, salary, dateHired, department, holidayLeft, shift ){
 
-       this.eId = eId;
-       this.eTitle = eTitle;
-       this.salary = salary;
-       this.dateHired = dateHired;
-       this.department = department;
-       this.holidayleft = holidayLeft;
-       this.shift= shift;
+      function CarFly(make, model){
+        this.make = make;
+        this.model = model;
+      }
 
-    };
+      //maintains a number of flyweight objects, when requested
+      // the CarFlyWeight will check if one exist.
+      function CarFlyWeight(make, model) {
+        var fly ={};
+        var makes=[]
+        return {
+                  get: function (make, model){
+                          if (!fly[make]) {
+                            fly[make] =new CarFly(make, model);
+                            }
+                            return fly[make];
+                          },
+                  count: function(){
+                          var i=0;
+                          for(var key in fly){
+                            makes[i]=key;
+                            i++;
+                            }
+                          return "We have : " + i + ' makes ' + makes;
+                        }
+                }
+          }
+      //several computer are stored to carcenter
+      function CarCenter () {
+          var cars = {};
+          var i = 0;
 
-    Employee.prototype = {
+          return {
+              add: function (make, model, color, vinNumber) {
+                  cars[vinNumber] =
+                      new Car(make, model, color, vinNumber);
+                  i++;
+              },
+              getCount: function () {
+                  return "We have : " + i + ' cars';
+              }
 
-      getTitle: function () {
-         return this.eTitle;
-      },
-     
-      getHired: function () {
-         return this.dateHired;
-      },
+          };
+      }
+      function Car(make, model, color, vinNumber){
+        this.getCar = carflyweight.get(make, model);
+        this.color = color;
+        this.vinNumber =vinNumber;
+        this.getMake = function(){
+          return this.getCar.make;
+        }
+      }
 
-      updateEmployeeStatus: function( eId, eTitle, department ){
+      var carflyweight = new CarFlyWeight();
+      var cars = new CarCenter();
 
-         this.eid = eId;
-         this.eTitle = eTitle;
-         this.department = department;
+      cars.add("toyota", "corolla","black", "Y755P8948204h843oO");
+      cars.add("toyota", "camry", "red", "fafkka8948204h843oO");
+      cars.add("toyota", "avilon", "white", "80802k55P8948204h8");
+      cars.add("honda", "civic", "black", "TYHUIW204h843oO");
+      cars.add("honda", "accord", "green", "Y75U9H04h843oO");
 
-      },
 
-      holidayStatus: function( eId, holidayLeft ){
-
-          this.eId = eId;
-          this.holidayLeft = holidayLeft;
-
-      },
-
-    };
-
+      console.log(cars.getCount());
+      console.log(carflyweight.count());
 
     </script>
   </body>
