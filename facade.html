@@ -6,33 +6,33 @@
   </head>
   <body>
     <script>
-    var facade =(function (){
+      var exampleFacade =(function (){
+        var myFacade = {
+          set: function(value){
+            this.valueFacade =value;
+          },
+          get: function(){
+            console.log("the value is " + this.valueFacade);
+          },
+          run : function(){
+            console.log("runnning");
+          }
+        };
+        return {
+          facade : function(args){
+            myFacade.set(args.val);
+            myFacade.get();
+            if(args.run){
+              myFacade.run();
+            }
+          }
+        }
+        })();
 
-    	function animal(kind){
-    		return kind + ' is an animal.';
-    	}
-    	function bird(kind){
-    		return kind + ' is a bird.';
-    	}
-
-
-    	return{
-    		find:function(kind,life){
-    			switch(life){
-    				case 'animal':
-    					return animal(kind);
-    				case 'bird':
-    					return bird(kind);
-
-    			}
-
-    		}
-    	}
-    })();
-
-    console.log(facade.find('dog','animal'));
-    console.log(facade.find('sparrow','bird'));
-
+        exampleFacade.facade({
+              run: true,
+              val: 10
+              })
     </script>
   </body>
 </html>

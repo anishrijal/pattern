@@ -6,45 +6,25 @@
   </head>
   <body>
     <script>
-      var myPerson =(function(){ //self calling function
-            var instance; // private property holding the only instance
-            var createNewPerson =function (){
-                var weight = 100;//private property of createfunction
-                var newWeight= function(lb){
-                  weight =lb;
-                };
-                var increaseWeight = function(passWeight){//private method to add more weight
-                  passWeight=passWeight+weight;
-                  newWeight(passWeight);
-                };
-                var getWeight = function(){
-                  return weight;
-                };
-                return{//using revealing module pattern whcih is closure to access private property
-                      //module pattern can also be used.
-                  setNewWeight: increaseWeight,
-                  getNewWeight: getWeight
-                };
-
-              };
-              return {//to create instance of person
+      var myPerson =(function(){
+            var instance;
+            function createNewPerson (){
+              var personObj = new Object (" I am a instance person")
+              return personObj;
+            }
+              return {
                 getInstance: function(){
                   if(!instance){
                     instance = createNewPerson();
                   }
-                  // if there is already an instance
-                  return createNewPerson();
-                }
-              };
-
+                  return instance;
+              }
+            }
     })();
 
-    var person1 = myPerson.getInstance();// creates the first person
-    console.log(person1.getNewWeight()); // the default value i.e 100
-    person1.setNewWeight(60); // increaseWeight method is called to add more weigth.
-    console.log(person1.getNewWeight());// return new weight i.e 160
-
-
+    var person1 = myPerson.getInstance();
+    var person2 = myPerson.getInstance();
+    console.log("Both return the same thing ?" + (person1 === person2));
     </script>
   </body>
 </html>
